@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ansh Jain Portfolio</title>
+<meta name="description" content="Ansh Jain: MBA Business Analytics candidate focused on business analytics, operations and supply chain analytics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a calm single-column portfolio with a sticky nav, a left label rail on wide screens, navy ink on cool paper with one amber accent. */
+:root {
+  --paper: #f4f6fa;
+  --card: #ffffff;
+  --ink: #14213d;
+  --muted: #5b6579;
+  --accent: #d98a00;
+  --line: #d9dfea;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+a { color: var(--ink); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+
+.nav {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  max-width: 1040px; margin: 0 auto; padding: 12px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+}
+.brand { font-family: var(--font-display); font-weight: 700; text-decoration: none; letter-spacing: .04em; }
+.nav ul { list-style: none; display: flex; gap: 18px; margin: 0; padding: 0; flex-wrap: wrap; font-size: 15px; }
+.nav ul a { text-decoration: none; color: var(--muted); }
+.nav ul a:hover { color: var(--ink); }
+
+main { max-width: 1040px; margin: 0 auto; padding: 0 20px 64px; }
+
+.hero { padding: 64px 0 48px; border-bottom: 1px solid var(--line); }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 20px; padding: 0; list-style: none; }
+.tags li {
+  font-size: 14px; font-weight: 600; padding: 4px 12px; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--card); color: var(--muted);
+}
+.hero h1 { font-size: clamp(2.6rem, 8vw, 5rem); font-weight: 700; letter-spacing: -0.01em; }
+.hero h1 span { color: var(--accent); }
+.hero p.lead { max-width: 62ch; font-size: 1.2rem; color: var(--muted); margin: 20px 0 28px; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  display: inline-block; text-decoration: none; font-weight: 600; padding: 11px 22px; border-radius: 8px;
+  background: var(--ink); color: #fff; border: 2px solid var(--ink);
+}
+.btn:hover { background: #22325a; }
+.btn.alt { background: transparent; color: var(--ink); }
+.btn.alt:hover { background: var(--card); }
+.meta { margin-top: 24px; color: var(--muted); font-size: 15px; }
+
+section { padding: 48px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 200px 1fr; gap: 24px 40px; }
+section:last-of-type { border-bottom: 0; }
+section > h2 { font-size: 1.05rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding-top: 4px; }
+section > h2::before { content: ""; display: block; width: 28px; height: 3px; background: var(--accent); margin-bottom: 10px; }
+@media (max-width: 760px) { section { grid-template-columns: 1fr; } }
+
+.about p { margin: 0 0 14px; max-width: 65ch; }
+.focus { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-top: 22px; }
+.focus div { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.focus strong { display: block; font-family: var(--font-display); font-size: 1.05rem; }
+.focus span { color: var(--muted); font-size: 15px; }
+
+.item { padding: 0 0 28px; margin: 0 0 28px; border-bottom: 1px dashed var(--line); }
+.item:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+.item-head { display: flex; justify-content: space-between; gap: 8px 20px; flex-wrap: wrap; align-items: baseline; }
+.item h3 { font-size: 1.3rem; }
+.when { color: var(--muted); font-size: 15px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.org { color: var(--muted); margin: 2px 0 10px; font-style: italic; }
+.item ul { margin: 0; padding-left: 20px; max-width: 68ch; }
+.item li { margin-bottom: 6px; }
+.item li::marker { color: var(--accent); }
+
+.skills { display: grid; gap: 22px; }
+.skills h3 { font-size: 1rem; margin-bottom: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.chips li { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 5px 12px; font-size: 15.5px; }
+.chips.tools li { border-color: var(--ink); font-weight: 600; }
+
+.certs { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.certs li {
+  background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 8px;
+  padding: 12px 16px; display: flex; justify-content: space-between; gap: 8px 20px; flex-wrap: wrap;
+}
+.certs b { font-weight: 600; }
+.certs small { display: block; color: var(--muted); font-size: 14.5px; }
+
+.contact p { margin: 0 0 18px; max-width: 55ch; }
+.contact dl { display: grid; grid-template-columns: max-content 1fr; gap: 8px 20px; margin: 0; }
+.contact dt { color: var(--muted); }
+.contact dd { margin: 0; overflow-wrap: anywhere; }
+.copy { font: inherit; font-size: 14px; margin-left: 10px; padding: 2px 10px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); cursor: pointer; color: var(--ink); }
+.copy:hover { border-color: var(--ink); }
+
+footer { max-width: 1040px; margin: 0 auto; padding: 24px 20px 40px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">ANSH JAIN</a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <ul class="tags" aria-label="Focus areas">
+      <li>Business Analytics</li><li>Operations</li><li>Supply Chain</li>
+    </ul>
+    <h1>Ansh Jain<span>.</span></h1>
+    <p class="lead">MBA Business Analytics candidate at Lovely Professional University, with a background in material management and supply chain studies. I work with Excel, SQL, Power BI, Tableau and Python to turn operations data into decisions.</p>
+    <div class="actions">
+      <a class="btn" href="#contact">Get in touch</a>
+      <a class="btn alt" href="https://www.linkedin.com/in/anshjain-25a2aa290" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <p class="meta">Ghaziabad, Uttar Pradesh &middot; Open to internships and entry-level roles in business analytics, operations analytics and supply chain analytics</p>
+  </div>
+
+  <section id="about" class="about">
+    <h2>About</h2>
+    <div>
+      <p>I am an MBA (Business Analytics) candidate at Lovely Professional University. Before that, I completed a B.Voc in Material Management (Logistics, Materials and Supply Chain Management) at the University of Delhi.</p>
+      <p>I have hands-on experience in B2B e-commerce operations and seller management. That work showed me how sellers, orders and operations connect, and why tracking the right metrics drives decisions.</p>
+      <div class="focus">
+        <div><strong>Business analytics</strong><span>Analysis, reporting and visualization</span></div>
+        <div><strong>Operations analytics</strong><span>Seller and order performance</span></div>
+        <div><strong>Supply chain analytics</strong><span>Forecasting and procurement</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+    <div>
+      <article class="item">
+        <div class="item-head"><h3>Operations &amp; Seller Onboarding Intern</h3><span class="when">Feb 2026 &ndash; May 2026</span></div>
+        <p class="org">DropDash Technologies Pvt Ltd, Noida</p>
+        <ul>
+          <li>Worked in the operations and seller management team of a B2B e-commerce company, supporting day-to-day operations.</li>
+          <li>Coordinated seller onboarding and helped resolve issues affecting orders and seller performance.</li>
+          <li>Gained practical understanding of how sellers, orders and operations connect, and why tracking the right metrics drives decisions.</li>
+        </ul>
+      </article>
+      <article class="item">
+        <div class="item-head"><h3>Head of Operations</h3><span class="when">July 2024 &ndash; July 2025</span></div>
+        <p class="org">VV &ndash; Vociferous Vocationals, College of Vocational Studies</p>
+        <ul>
+          <li>Led operations and activities of the vocational society, driving initiatives that contributed to student and societal growth.</li>
+          <li>Collaborated with multiple teams to organize events and workshops, increasing student engagement.</li>
+        </ul>
+      </article>
+      <article class="item">
+        <div class="item-head"><h3>Member</h3><span class="when">2023 &ndash; 2024</span></div>
+        <p class="org">M.Soc &ndash; The Management Society of CVS</p>
+        <ul>
+          <li>Contributed to planning and execution of management-related events.</li>
+          <li>Built teamwork and leadership skills through active participation in society activities.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <div>
+      <article class="item">
+        <div class="item-head"><h3>Master of Business Administration, Business Analytics</h3><span class="when">Aug 2026 &ndash; Aug 2028</span></div>
+        <p class="org">Lovely Professional University (LPU)</p>
+      </article>
+      <article class="item">
+        <div class="item-head"><h3>B.Voc, Material Management</h3><span class="when">Aug 2023 &ndash; July 2026</span></div>
+        <p class="org">Logistics, Materials &amp; Supply Chain Management &middot; College of Vocational Studies, University of Delhi</p>
+      </article>
+      <article class="item">
+        <div class="item-head"><h3>Senior Secondary (Class XII)</h3><span class="when">2022 &ndash; 2023</span></div>
+        <p class="org">Ryan International School</p>
+      </article>
+      <article class="item">
+        <div class="item-head"><h3>Secondary (Class X)</h3><span class="when">2020 &ndash; 2021</span></div>
+        <p class="org">Ryan International School</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div>
+        <h3>Analytics &amp; tools</h3>
+        <ul class="chips tools"><li>MS Excel</li><li>SQL</li><li>Power BI</li><li>Tableau</li><li>Python</li></ul>
+      </div>
+      <div>
+        <h3>Domain</h3>
+        <ul class="chips"><li>Supply Operations</li><li>Supply Chain &amp; Logistics</li><li>Seller Management</li><li>B2B E-commerce Operations</li></ul>
+      </div>
+      <div>
+        <h3>Core skills</h3>
+        <ul class="chips"><li>Data Analysis</li><li>Data Visualization</li><li>Reporting</li><li>Problem Solving</li><li>Decision-Making</li><li>Team Management</li><li>Communication</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <h2>Certifications</h2>
+    <ul class="certs">
+      <li><span><b>Excel Data Analysis for Supply Chain: Forecasting</b><small>LinkedIn Learning</small></span><span class="when">Oct 2026</span></li>
+      <li><span><b>Excel Business Intelligence: Power Pivot, DAX and Data Modeling</b><small>LinkedIn Learning</small></span><span class="when">Oct 2026</span></li>
+      <li><span><b>Business Analysis: Essential Tools and Techniques</b><small>LinkedIn Learning</small></span><span class="when">Oct 2026</span></li>
+      <li><span><b>Excel Supply Chain Analysis: Solving Procurement Problems</b><small>LinkedIn Learning</small></span><span class="when">Sep 2026</span></li>
+    </ul>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Contact</h2>
+    <div>
+      <p>I am looking for internships and entry-level roles in business analytics, operations analytics and supply chain analytics. Write to me or connect on LinkedIn.</p>
+      <dl>
+        <dt>Email</dt>
+        <dd><a href="mailto:jainansh0234@gmail.com">jainansh0234@gmail.com</a><button class="copy" type="button" id="copy-email">Copy</button></dd>
+        <dt>Phone</dt>
+        <dd>8587098674</dd>
+        <dt>LinkedIn</dt>
+        <dd><a href="https://www.linkedin.com/in/anshjain-25a2aa290" target="_blank" rel="noopener">linkedin.com/in/anshjain-25a2aa290</a></dd>
+        <dt>Location</dt>
+        <dd>Ghaziabad, Uttar Pradesh</dd>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer>&copy; 2026 Ansh Jain</footer>
+
+<script>
+(function () {
+  var btn = document.getElementById("copy-email");
+  btn.addEventListener("click", function () {
+    var done = function (t) { btn.textContent = t; setTimeout(function () { btn.textContent = "Copy"; }, 1800); };
+    try {
+      navigator.clipboard.writeText("jainansh0234@gmail.com").then(function () { done("Copied"); }, function () { done("Select to copy"); });
+    } catch (e) { done("Select to copy"); }
+  });
+})();
+</script>
+</body>
+</html>
